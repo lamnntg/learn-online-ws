@@ -111,3 +111,5 @@ var port_ws = process.env.APP_WS_PORT || 8000;
 server.listen(port_ws, () =>
   console.log(`socket is running on port ${port_ws}`)
 );
+
+app.listen(process.env.PORT || 5000);
