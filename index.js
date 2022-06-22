@@ -1,14 +1,13 @@
 require("dotenv").config();
 const express = require('express')
 const cors = require('cors');
-var http = require('http');
 
 const app = express();
 app.use(express.json({ limit: '50mb' }));
 app.use(cors());
 
 // socket.io
-var server = http.createServer(app);
+var server = require('http').Server(app);
 const io = require("socket.io")(server, {
   cors: {
     origin: "*",
@@ -107,9 +106,7 @@ io.on("connection", (socket) => {
   });
 });
 
-var port_ws = process.env.APP_WS_PORT || 8000;
-server.listen(port_ws, () =>
-  console.log(`socket is running on port ${port_ws}`)
+var PORT = process.env.PORT || 3231;
+server.listen(PORT, () =>
+  console.log(`socket is running on port ${PORT}`)
 );
-
-app.listen(process.env.PORT || 5000);
